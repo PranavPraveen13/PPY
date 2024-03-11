@@ -1,3 +1,3 @@
 # Pranav Praveen
-## Student ID: <s26936>
-## Group Number: <13>
+## Student ID: s26936
+## Group Number: 13c
