@@ -30,11 +30,11 @@ Write a Python program that takes input from the user to create a list of intege
 # Input
 input_numbers = input("Enter a series of space-separated integers: ")
 
-# Convert Input:
+# Convert Input
+numbers_list = list(map(int, input_numbers.split()))
 
-
-# Sorting:
-
+# Sorting
+numbers_list.sort()
 
 # Print Output
 print("Sorted list:", numbers_list)
