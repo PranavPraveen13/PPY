@@ -1,4 +1,4 @@
-Student Number: s26936
+Student Number: 26936
 
 Original List: [5, 2, 20, 1, 9, 10]
 Original Tuple: (5, 2, 8, 1, 9)

@@ -520,8 +520,86 @@ These are fundamental constructs in Python programming that enable you to contro
 
   The program will generate the list of prime numbers up to 20, perform calculations, and write the results to 'prime_numbers.txt'.
 """
+import re
+import math
 
 
+def find_largest_integer(filename):
+    largest_integer = None
+    with open(filename, 'r') as file:
+        content = file.read()
+        integers = [int(x) for x in re.findall(r'\b\d+\b', content)]
+        if integers:
+            largest_integer = max(integers)
+    return largest_integer
+
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+
+
+def generate_primes(n):
+    primes = []
+    for num in range(2, n + 1):
+        if is_prime(num):
+            primes.append(num)
+    return primes
+
+
+def write_prime_numbers(filename, primes, prime_sum, largest_prime, smallest_prime, largest_integer_prime):
+    with open(filename, 'w') as file:
+        file.write("List of Prime Numbers: ")
+        file.write(", ".join(map(str, primes)) + "\n")
+        file.write("Sum of Prime Numbers: " + str(prime_sum) + "\n")
+        file.write("Largest Prime Number: " + str(largest_prime) + "\n")
+        file.write("Smallest Prime Number: " + str(smallest_prime) + "\n")
+        file.write("Is Largest Integer Itself Prime?: " + str(largest_integer_prime) + "\n")
+
+
+# Read the largest integer from the output.txt file
+largest_integer = find_largest_integer('output.txt')
+
+if largest_integer:
+    # Generate a list of all prime numbers up to the largest integer
+    primes = generate_primes(largest_integer)
+
+    if primes:
+        # Print the list of prime numbers
+        print("List of Prime Numbers:", primes)
+
+        # Calculate the sum of all prime numbers in the list
+        prime_sum = sum(primes)
+        print("Sum of Prime Numbers:", prime_sum)
+
+        # Determine the largest and smallest prime numbers in the list
+        largest_prime = max(primes)
+        smallest_prime = min(primes)
+        print("Largest Prime Number:", largest_prime)
+        print("Smallest Prime Number:", smallest_prime)
+
+        # Check if the largest integer itself is prime
+        largest_integer_prime = is_prime(largest_integer)
+        print("Is Largest Integer Itself Prime?:", largest_integer_prime)
+
+        # Write the list of prime numbers along with the sum, largest, and smallest prime numbers to a file 'prime_numbers.txt'
+        write_prime_numbers('prime_numbers.txt', primes, prime_sum, largest_prime, smallest_prime,
+                            largest_integer_prime)
+
+    else:
+        print("No prime numbers found up to the largest integer.")
+else:
+    print("Error: Largest integer not found in 'output.txt'.")
 
 """10.
 In the final main.py file, leave the results from task 8 and 9, commit and push
